@@ -44,7 +44,7 @@ gretty {
             '-XX:MaxPermSize=256m',
             '-Xms512m',
             '-Xmx1024m']
-    port = 8070
+    port = 8075
     scanInterval = 1
     fastReload = true
     recompileOnSourceChange = true
