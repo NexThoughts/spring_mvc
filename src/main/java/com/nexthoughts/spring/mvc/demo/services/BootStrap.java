@@ -20,7 +20,7 @@ public class BootStrap implements InitializingBean {
     @Transactional
     @PostConstruct
     public void afterPropertiesSet() throws Exception {
-        System.out.println("Bootstrapping data...");
+        /*System.out.println("Bootstrapping data...");
 
         for (int i = 0; i < 10; i++) {
             StudentCommand studentCommand = new StudentCommand();
@@ -32,7 +32,6 @@ public class BootStrap implements InitializingBean {
             log.info("===================STUDENT CREATED with email" + studentCommand.getEmailAddress() + "===================");
         }
 
-        System.out.println("...Bootstrapping completed");
+        System.out.println("...Bootstrapping completed");*/
     }
-
 }
