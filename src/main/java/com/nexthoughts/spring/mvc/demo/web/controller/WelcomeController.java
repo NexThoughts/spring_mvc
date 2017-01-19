@@ -20,7 +20,7 @@ public class WelcomeController {
     private WelcomeService welcomeService;
 
 
-
+    @Secured({"ROLE_ADMIN"})
     @RequestMapping(value = {"/"}, method = RequestMethod.GET)
     public ModelAndView index() {
         logger.info("Index executed");

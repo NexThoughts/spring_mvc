@@ -42,10 +42,12 @@ public class BootStrap implements InitializingBean {
             }
         }
 
-        createAdminUser();
-        createUser();
 
-        User user = userService.read(1L);
+        if (userService.list().isEmpty()) {
+            createAdminUser();
+            createUser();
+        }
+
         System.out.println("===============================================================================");
         System.out.println("===============================================================================");
         System.out.println("===============================================================================");
@@ -59,7 +61,6 @@ public class BootStrap implements InitializingBean {
         System.out.println("===============================================================================");
         System.out.println("===============================================================================");
         System.out.println("===============================================================================");
-        System.out.println("=====================" + user.getRoles().size() + "============================");
         System.out.println("===============================================================================");
         System.out.println("===============================================================================");
         System.out.println("===============================================================================");
@@ -73,25 +74,8 @@ public class BootStrap implements InitializingBean {
         System.out.println("===============================================================================");
         System.out.println("...Bootstrapping completed");
 
-
     }
 
-
-    public void createSpringSecurityBootstrapData() {
-        //Creating Roles
-        /*String admin = "ROLE_ADMIN";
-        String user = "ROLE_USER";
-        Role roleAdmin = roleService.read(roleService.create(admin));
-        Role roleUser = roleService.read(roleService.create(user));
-        System.out.println("Role created with role - " + roleAdmin.getRole());
-        System.out.println("Role created with role - " + roleUser.getRole());
-
-        createAdminUser(roleAdmin);
-        createUser(roleUser);
-
-        System.out.println("Bootstrapping of Users Completed");*/
-
-    }
 
     public void createAdminUser() {
         UserCommand adminUserCommand = new UserCommand();

@@ -2,6 +2,7 @@ package com.nexthoughts.spring.mvc.demo.classes;
 
 
 import com.nexthoughts.spring.mvc.demo.model.Role;
+import com.nexthoughts.spring.mvc.demo.model.User;
 
 import java.util.Set;
 
@@ -26,6 +27,14 @@ public class UserCommand {
     }
 
     public UserCommand() {
+    }
+
+
+    public UserCommand(User user) {
+        this.id = user.getId();
+        this.email = user.getEmail();
+        this.username = user.getUsername();
+        this.password = user.getPassword();
     }
 
 

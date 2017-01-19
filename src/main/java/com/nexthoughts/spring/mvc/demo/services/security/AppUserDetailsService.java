@@ -23,9 +23,32 @@ public class AppUserDetailsService implements UserDetailsService {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private PasswordEncoderService passwordEncoderService;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userService.getUserbyUsername(username);
+        System.out.println("=====================================================");
+        System.out.println("=====================================================");
+        System.out.println("=====================================================");
+        System.out.println("=====================================================");
+        System.out.println("=====================================================");
+        System.out.println("=====================================================");
+        System.out.println("=====================================================");
+        System.out.println("=====================================================");
+        System.out.println("=====================================================");
+        System.out.println("=====================================================");
+        System.out.println("=====================================================");
+        System.out.println("=====================================================");
+        System.out.println("=====================================================");
+        System.out.println("=====================================================");
+        System.out.println("=====================================================");
+        System.out.println("=====================================================");
+        System.out.println("=====================================================");
+        System.out.println("=====================================================");
+        System.out.println(user.getPassword());
+
         if (user != null) {
             Collection<GrantedAuthority> authorities = new HashSet<>(user.getRoles().size());
             Set<Role> userRoles = user.getRoles();

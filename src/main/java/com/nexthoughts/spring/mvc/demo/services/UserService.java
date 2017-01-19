@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @Transactional
 public class UserService {
@@ -44,7 +47,19 @@ public class UserService {
 
     public User getUserbyUsername(String username) {
         return (User) getSession().createCriteria(User.class)
-                .add(Restrictions.eq("username", username))
-                .uniqueResult();
+                .add(Restrictions.eq("username", username)).uniqueResult();
+
+    }
+
+    public List<UserCommand> list() {
+        List<User> userList = getSession().createCriteria(User.class).list();
+        List<UserCommand> userCommandList = new ArrayList<>();
+        UserCommand userCommand = null;
+        for (User user : userList) {
+            userCommand = new UserCommand(user);
+            userCommandList.add(userCommand);
+        }
+        getSession().close();
+        return userCommandList;
     }
 }

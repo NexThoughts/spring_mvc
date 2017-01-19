@@ -6,6 +6,9 @@ import com.nexthoughts.spring.mvc.demo.services.StudentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,6 +19,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping(value = "/student")
+@EnableGlobalMethodSecurity(securedEnabled = true)
 public class StudentController {
 
     private final Logger logger = LoggerFactory.getLogger(StudentController.class);
@@ -39,6 +43,8 @@ public class StudentController {
         return modelAndView;
     }
 
+
+    @Secured("ROLE_USER")
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ModelAndView createStudentForm() {
         logger.info("Executing GET method for /student/create");
@@ -69,6 +75,7 @@ public class StudentController {
         modelAndView.setViewName("redirect:list");
         return modelAndView;
     }
+
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public ModelAndView saveStudent(StudentCommand studentCommand) {
