@@ -1,0 +1,37 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <div id="headerResources" th:include="template/layout::headerResources"></div>
+    <title>Home</title>
+</head>
+<body>
+
+<div id="topBar" th:include="template/layout::topBar"></div>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div id="leftNav" th:include="template/layout::leftNav"></div>
+        <div class="span9">
+            <div class="hero-unit">
+                <h1>Logged in Successfully!</h1>
+            </div>
+            <div class="row-fluid">
+                <div class="span12">
+                    <div id="content" layout:fragment="content">
+                        <p>Welcome, <span th:text="${user.username}">username</span>!</p>
+
+                        <form method="POST" th:action="@{/logout}">
+                            <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+                            <button>Sign Out</button>
+                        </form>
+                    </div><!--/span-->
+                </div><!--/row-->
+            </div><!--/span-->
+        </div><!--/row-->
+    </div><!--/.fluid-container-->
+    <div th:include="template/layout::copyright"></div>
+
+</div>
+<div id="resourceJS" th:include="template/layout::resourceJS"></div>
+</body>
+</html>

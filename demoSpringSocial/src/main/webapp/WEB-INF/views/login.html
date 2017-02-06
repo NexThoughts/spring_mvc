@@ -1,0 +1,42 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorator="layout">
+<head>
+    <div id="headerResources" th:include="template/layout::headerResources"></div>
+    <title>Log In</title>
+</head>
+<body>
+<div id="topBar" th:include="template/layout::topBar"></div>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span9">
+            <div class="row-fluid">
+                <div class="span12">
+                    <div id="content" layout:fragment="content">
+                        <h1>Login page</h1>
+                        <p th:if="${loginError}" class="error">Wrong user or password</p>
+                        <form th:action="@{/login}" method="post">
+                            <label for="username">Username</label>:
+                            <input type="text" id="username" name="username" autofocus="autofocus"/> <br/>
+                            <label for="password">Password</label>:
+                            <input type="password" id="password" name="password"/> <br/>
+                            <input type="submit" value="Log in"/>
+
+                            <p>Or you can <a th:href="@{/signup}">signup</a> with a new account.</p>
+                        </form>
+                        <!-- TWITTER SIGNIN -->
+                        <p>
+                            <a th:href="@{/auth/twitter}"><img
+                                    th:src="@{/resources/social/twitter/sign-in-with-twitter-d.png}" border="0"/></a>
+                        </p>
+                    </div><!--/span-->
+                </div><!--/row-->
+            </div><!--/span-->
+        </div><!--/row-->
+
+    </div><!--/.fluid-container-->
+    <div th:include="template/layout::copyright"></div>
+
+</div>
+<div id="resourceJS" th:include="template/layout::resourceJS"></div>
+</body>
+</html>

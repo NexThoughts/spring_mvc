@@ -1,0 +1,44 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" layout:decorator="layout"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <div id="headerResources" th:include="template/layout::headerResources"></div>
+    <title>Status</title>
+</head>
+<body>
+
+<div id="topBar" th:include="template/layout::topBar"></div>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span9">
+            <div class="row-fluid">
+                <div class="span12">
+                    <div id="content" layout:fragment="content">
+                        <h3>Your Connections</h3>
+
+                        <div class="accountConnection" th:each="providerId : ${providerIds}">
+                            <h4><img th:src="@{#{${providerId} + '.icon'}}" width="36" height="36"/><span
+                                    th:text="#{${providerId} + '.displayName'}">provider name</span></h4>
+                            <p>
+ 				<span th:if="${!#lists.isEmpty(connectionMap[__${providerId}__])}">
+					You are connected to <span th:text="#{${providerId} + '.displayName'}">provider name</span> as <span
+                        th:text="${connectionMap[__${providerId}__][0].displayName}">user display name</span>.
+				</span>
+                                <span th:if="${#lists.isEmpty(connectionMap[__${providerId}__])}">
+					You are not yet connected to <span th:text="#{${providerId} + '.displayName'}">provider name</span>.
+				</span>
+                                Click <a th:href="@{'/connect/' + ${providerId}}">here</a> to manage your <span
+                                    th:text="#{${providerId} + '.displayName'}">provider name</span> connection.
+                            </p>
+                        </div>
+                    </div><!--/span-->
+                </div><!--/row-->
+            </div><!--/span-->
+        </div><!--/row-->
+    </div><!--/.fluid-container-->
+</div>
+<div th:include="template/layout::copyright"></div>
+
+<div id="resourceJS" th:include="template/layout::resourceJS"></div>
+</body>
+</html>

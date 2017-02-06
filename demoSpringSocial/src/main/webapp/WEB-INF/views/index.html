@@ -1,0 +1,74 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:include="template/page::resourceCSS">
+    <title>Link Sharing</title>
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+    <div th:include="template/page::header"></div>
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>
+                Topic List
+                <small>Topics</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a th:href="@{/}"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li><a href="javascript:void(0)">List</a></li>
+                <li class="active">Topic</li>
+            </ol>
+        </section>
+        <section class="content">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box box-primary">
+                        <div class="box-header">
+                            <i class="ion ion-clipboard"></i>
+                            <h3 class="box-title">Topic List</h3>
+                        </div>
+                        <div class="box-body">
+                            <div th:if="${#lists.isEmpty(topicList)}">
+                                <div class="alert alert-danger">No Topic Record's Found</div>
+                            </div>
+                            <div th:if="!${#lists.isEmpty(topicList)}">
+                                <ul class="todo-list">
+                                    <li th:each="topic: ${topicList}">
+                                        <span class="handle">
+                                            <i class="fa fa-ellipsis-v"></i>
+                                            <i class="fa fa-ellipsis-v"></i>
+                                        </span>
+                                        <input type="checkbox" value="" name="">
+                                        <span class="text" th:text="${topic.getTopicName()}">
+                                            ${topic.getTopicName()}
+                                        </span>
+                                        <small class="label label-info">
+                                            <i class="fa fa-clock-o"></i> 4 hours
+                                        </small>
+                                        <div class="tools">
+                                            <a class="btn btn-flat btn btn-flat-primary"
+                                               th:href="@{/topic/edit/__${topic.getId()}__}">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+
+                                            <a class="btn btn btn-flat-danger"
+                                               th:href="@{/topic/delete/__${topic.getId()}__}">
+                                                <i class="fa fa-trash-o"></i>
+                                            </a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="box-footer clearfix no-border">
+                            <a th:href="@{/topic/create}" class="btn btn-flat btn-default pull-right">
+                                <i class="fa fa-plus"></i> Add item
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div th:include="template/page :: copy"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" layout:decorator="layout"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <div id="headerResources" th:include="template/layout::headerResources"></div>
+    <title>Twitter Message</title>
+</head>
+<body>
+<div id="topBar" th:include="template/layout::topBar"></div>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div id="leftNav" th:include="template/layout::leftNav"></div>
+        <div class="span9">
+            <div class="hero-unit">
+                <h1>Hello, world!</h1>
+                <p>This is a template for a simple marketing or informational website. It includes a large callout
+                    called the hero unit and three supporting pieces of content. Use it as a starting point to create
+                    something more unique.</p>
+                <p><a href="http://getbootstrap.com/2.3.2/examples/fluid.html#" class="btn btn-primary btn-large">Learn
+                    more »</a></p>
+            </div>
+            <div class="row-fluid">
+                <div class="span12">
+                    <div id="content" layout:fragment="content">
+                        <h3>Your Twitter <span th:text="${dmListType}">list type</span> Messages</h3>
+
+                        <!--  TODO: Bind form -->
+                        <form th:action="@{/twitter/messages}" method="post">
+                            <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+                            <p>Send a message:</p>
+                            <label>To: </label><input type="text" name="to"/><br/>
+                            <textarea name="text" rows="2" cols="80"></textarea><br/>
+                            <input type="submit" value="Send Message"/>
+                        </form>
+
+                        <ul class="choices">
+                            <li><a th:href="@{/twitter/messages}">Inbox</a></li>
+                            <li><a th:href="@{/twitter/messages} + '/sent'">Sent</a></li>
+                        </ul>
+
+
+                        <div class="feed">
+                            <ul class="imagedList">
+                                <li class="imagedItem" th:each="dm : ${directMessages}">
+                                    <div class="image" th:if="${!#strings.isEmpty(dm.sender.profileImageUrl)}">
+                                        <img th:src="${dm.sender.profileImageUrl}" align="left"/>
+                                    </div>
+                                    <div class="content">
+                                        <strong><a th:href="'http://twitter.com/' + ${dm.sender.screenName}"
+                                                   th:text="${dm.sender.screenName}">screen name</a></strong><br/>
+                                        <span class="dmRecipient">to <span
+                                                th:text="${dm.recipient.screenName}">screen name</span></span><br/>
+                                        <span th:text="${dm.text}">text</span><br/>
+                                        <span class="postTime" th:text="${dm.createdAt}"></span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div><!--/span-->
+                </div><!--/row-->
+            </div><!--/span-->
+        </div><!--/row-->
+
+    </div><!--/.fluid-container-->
+    <div th:include="template/layout::copyright"></div>
+</div>
+<div id="resourceJS" th:include="template/layout::resourceJS"></div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" layout:decorator="layout"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <div id="headerResources" th:include="template/layout::headerResources"></div>
+    <title>Sign Up</title></head>
+<body>
+
+<div id="topBar" th:include="template/layout::topBar"></div>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span9">
+            <div class="row-fluid">
+                <div class="span12">
+                    <div id="content" layout:fragment="content">
+                        <h3>Sign Up</h3>
+
+                        <!--<div th:if="${!#strings.isEmpty(message)}"
+                             th:class="${message.type.cssClass}"
+                             th:text="${message.text}">error message text
+                        </div>-->
+
+                        <form id="signup" th:action="@{/signup}" method="post" th:object="${userCommand}">
+                            <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+                            <div class="formInfo">
+                                <div class="error" th:if="${#fields.hasErrors('*')}">Unable to sign up. Please fix the
+                                    errors below
+                                    and resubmit.
+                                </div>
+                            </div>
+
+                            <fieldset>
+                                <label for="username">Username </label>
+                                <input type="text" th:field="*{username}"/>
+                                <label for="password">Password (at least 6 characters) </label>
+                                <input type="password" th:field="*{password}"/>
+                                <label for="email">Email </label>
+                                <input type="text" th:field="*{email}"/>
+                            </fieldset>
+                            <p>
+                                <button type="submit">Sign Up</button>
+                            </p>
+                        </form>
+                    </div><!--/span-->
+                </div><!--/row-->
+            </div><!--/span-->
+        </div><!--/row-->
+
+    </div><!--/.fluid-container-->
+    <div th:include="template/layout::copyright"></div>
+
+</div>
+<div id="resourceJS" th:include="template/layout::resourceJS"></div>
+</body>
+</html>
+

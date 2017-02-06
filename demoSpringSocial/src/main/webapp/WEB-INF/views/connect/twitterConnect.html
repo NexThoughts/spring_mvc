@@ -1,0 +1,48 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" layout:decorator="layout"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <div id="headerResources" th:include="template/layout::headerResources"></div>
+    <title>Connect to Twitter</title>
+</head>
+<body>
+
+
+<div id="topBar" th:include="template/layout::topBar"></div>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span9">
+            <div class="row-fluid">
+                <div class="span12">
+                    <div id="content" layout:fragment="content">
+                        <h3>Connect to Twitter</h3>
+
+                        <form th:action="@{/connect/twitter}" method="POST">
+                            <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+                            <div class="formInfo">
+                                <p>
+                                    You haven't created any connections with Twitter yet. Click the button to connect
+                                    Spring Social Showcase
+                                    with your Twitter account.
+                                    (You'll be redirected to Twitter where you'll be asked to authorize the connection.)
+                                </p>
+                            </div>
+                            <p>
+                                <button type="submit"><img
+                                        th:src="@{/resources/social/twitter/connect-with-twitter.png}"/></button>
+                            </p>
+                            <label for="postTweet"><input id="postTweet" type="checkbox" name="postTweet"/> Post a tweet
+                                about connecting
+                                with Spring Social Showcase</label>
+                        </form>
+                    </div><!--/span-->
+                </div><!--/row-->
+            </div><!--/span-->
+        </div><!--/row-->
+
+    </div><!--/.fluid-container-->
+    <div th:include="template/layout::copyright"></div>
+</div>
+<div id="resourceJS" th:include="template/layout::resourceJS"></div>
+</body>
+</html>

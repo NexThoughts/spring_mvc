@@ -1,0 +1,34 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" layout:decorator="layout"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <div id="headerResources" th:include="template/layout::headerResources"></div>
+    <title>Twitter Trending</title>
+</head>
+<body>
+<div id="topBar" th:include="template/layout::topBar"></div>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div id="leftNav" th:include="template/layout::leftNav"></div>
+        <div class="span9">
+            <div class="row-fluid">
+                <div class="span12">
+                    <div id="content" layout:fragment="content">
+                        <h3>Daily Twitter Trends</h3>
+
+                        <span th:each="trend : ${trends.trends}">
+				<a href="@{'/twitter/search?query=' + ${trend.query}" th:text="${trend.name}">trend name</a><br/>
+			</span>
+                    </div><!--/span-->
+                </div><!--/row-->
+            </div><!--/span-->
+        </div><!--/row-->
+
+    </div><!--/.fluid-container-->
+    <div th:include="template/layout::copyright"></div>
+
+</div>
+<div id="resourceJS" th:include="template/layout::resourceJS"></div>
+</body>
+</html>
+

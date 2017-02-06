@@ -1,0 +1,40 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" layout:decorator="layout"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <div id="headerResources" th:include="template/layout::headerResources"></div>
+    <title>Twitter Friends</title>
+</head>
+<body>
+<div id="topBar" th:include="template/layout::topBar"></div>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div id="leftNav" th:include="template/layout::leftNav"></div>
+        <div class="span9">
+            <div class="row-fluid">
+                <div class="span12">
+                    <div id="content" layout:fragment="content">
+                        <h3>Your Twitter Friends</h3>
+
+                        <ul class="imagedList">
+                            <li class="imagedItem" th:each="profile : ${profiles}">
+                                <div class="image" th:if="${!#strings.isEmpty(profile.profileImageUrl)}">
+                                    <img th:src="${profile.profileImageUrl}" width="48" height="48" align="left"/>
+                                </div>
+                                <div class="content">
+                                    <p><a th:href="'http://twitter.com/' + ${profile.screenName}"
+                                          th:text="${profile.screenName}">screen
+                                        name</a></p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div><!--/span-->
+                </div><!--/row-->
+            </div><!--/span-->
+        </div><!--/row-->
+    </div><!--/.fluid-container-->
+    <div th:include="template/layout::copyright"></div>
+</div>
+<div id="resourceJS" th:include="template/layout::resourceJS"></div>
+</body>
+</html>
