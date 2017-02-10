@@ -19,9 +19,9 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter-data-jpa:1.1.4.RELEASE'
     compile 'org.hibernate:hibernate-core:4.3.6.Final'
     compile 'commons-dbcp:commons-dbcp:1.4'
-    compile group: 'org.springframework.security', name: 'spring-security-web', version: '4.2.1.RELEASE'
+    /*compile group: 'org.springframework.security', name: 'spring-security-web', version: '4.2.1.RELEASE'
     compile group: 'org.springframework.security', name: 'spring-security-config', version: '4.2.1.RELEASE'
-    compile group: 'org.springframework.security', name: 'spring-security-core', version: '4.2.1.RELEASE'
+    compile group: 'org.springframework.security', name: 'spring-security-core', version: '4.2.1.RELEASE'*/
 
     //include in compile only, exclude in the war
     providedCompile 'javax.servlet:servlet-api:2.5'
@@ -44,7 +44,7 @@ gretty {
             '-XX:MaxPermSize=256m',
             '-Xms512m',
             '-Xmx1024m']
-    port = 8075
+    //port = 8075
     scanInterval = 1
     fastReload = true
     recompileOnSourceChange = true
