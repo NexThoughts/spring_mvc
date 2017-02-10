@@ -14,24 +14,27 @@ public class BootStrap implements InitializingBean {
     @Autowired
     StudentService studentService;
 
+
     private final Logger log = org.slf4j.LoggerFactory.getLogger(BootStrap.class);
 
     @Override
     @Transactional
     @PostConstruct
     public void afterPropertiesSet() throws Exception {
-        /*System.out.println("Bootstrapping data...");
+        System.out.println("Bootstrapping data...");
+        if (studentService.list().isEmpty()) {
+            for (int i = 0; i < 10; i++) {
+                StudentCommand studentCommand = new StudentCommand();
+                studentCommand.setFirstName("Student" + i);
+                studentCommand.setLastName("Last" + i);
+                studentCommand.setEmailAddress("nakul+" + i + "@nexthoughts.com");
+                studentService.create(studentCommand);
 
-        for (int i = 0; i < 10; i++) {
-            StudentCommand studentCommand = new StudentCommand();
-            studentCommand.setFirstName("Student" + i);
-            studentCommand.setLastName("Last" + i);
-            studentCommand.setEmailAddress("nakul+" + i + "@nexthoughts.com");
-            studentService.create(studentCommand);
-
-            log.info("===================STUDENT CREATED with email" + studentCommand.getEmailAddress() + "===================");
+                log.info("===================STUDENT CREATED with email" + studentCommand.getEmailAddress() + "===================");
+            }
         }
 
-        System.out.println("...Bootstrapping completed");*/
     }
+
 }
+
